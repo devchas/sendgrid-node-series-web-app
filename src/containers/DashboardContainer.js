@@ -4,12 +4,9 @@ import { getAllSeries, getSeriesById, getSGTemplates } from '../actions';
 import Dashboard from '../components/Dashboard';
 import CreateSeries from '../components/CreateSeries';
 
-const seriesId = 1;
-
 class DashboardContainer extends Component {
   componentWillMount() {
     this.props.getAllSeries();
-    this.props.getSeriesById(seriesId);
     this.props.getSGTemplates();
   }
 

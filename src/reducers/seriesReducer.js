@@ -4,6 +4,7 @@ import _ from 'lodash';
 const initialState = {
   sgTemplates: [],
   seriesList: [],
+  seriesUserList: [],
   emailSeries: {},
   updateSwitch: false
 };
@@ -85,9 +86,25 @@ export default function(state = initialState, { type, payload }) {
         seriesList: updatedSeriesList,
         updateSwitch: state.updateSwitch
       }); 
+    case types.GET_SERIES_USERS:
+      return Object.assign({}, state, {
+        seriesUserList: prepareSeriesUserList(state.seriesUserList, payload)
+      });
     default:
       return state;
   }
+}
+
+function prepareSeriesUserList(seriesUserList, { emailSeryId, users }) {
+  if (seriesUserList.length === 0) { return [{ emailSeryId, users }]; }
+
+  return seriesUserList.map(item => {
+    if (item.id === emailSeryId) {
+      return { emailSeryId, users };
+    } else {
+      return item;
+    }
+  });
 }
 
 function sortByDays(list) {
