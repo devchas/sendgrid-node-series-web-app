@@ -101,7 +101,7 @@ class Dashboard extends Component {
     const { isViewingUsers } = this.state;
     const buttonText = (isViewingUsers) ? "View Stages" : "View Users";
     return <button onClick={() => this.setState({ isViewingUsers: !isViewingUsers })} 
-      className="label-button button-1">{buttonText}</button>;
+      className="label-button toggle-button">{buttonText}</button>;
   }
 
   renderUserOrStageTable() {

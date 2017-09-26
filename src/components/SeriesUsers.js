@@ -60,7 +60,7 @@ class SeriesUsers extends Component {
     const nextStage = _.minBy(stagesToReceive, o => o.daysToSend);
 
     if (nextStage) {
-      let deliveryDate = today + (nextStage.daysToSend * 1000 * 3600 * 24);
+      let deliveryDate = date + (nextStage.daysToSend * 1000 * 3600 * 24);
       deliveryDate = new Date(deliveryDate);
       deliveryDate = moment(deliveryDate).format("MMMM Do, YYYY");
       return { label: nextStage.label, deliveryDate }

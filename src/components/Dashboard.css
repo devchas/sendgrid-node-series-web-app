@@ -19,7 +19,7 @@
 }
 
 .series-list-container {
-  padding-bottom: 100px;
+  /*padding-bottom: 100px;*/
 }
 
 .dashboard-container {
@@ -56,6 +56,12 @@
 
 .label-button {
   margin: 0px 5px;
+}
+
+.toggle-button {
+  background-color: #2196f3;
+  color: white;
+  box-shadow: 2px 2px 2px #bfbfbf;  
 }
 
 table {
