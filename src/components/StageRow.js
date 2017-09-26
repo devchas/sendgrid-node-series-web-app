@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createStage, updateStage, deleteStage } from '../actions';
+import { createStage, updateStage, deleteStage, toggleModal } from '../actions';
 import _ from 'lodash';
 import './Dashboard.css';
 
@@ -93,6 +93,10 @@ class StageRow extends Component {
   }
 
   handleClickDelete() {
+    this.props.toggleModal(() => this.handleDelete());
+  }
+
+  handleDelete() {
     const { emailSeryId } = this.props;
     const { id } = this.props;
     this.props.deleteStage({ emailSeryId, id });
@@ -182,6 +186,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    toggleModal: params => dispatch(toggleModal(params)),
     createStage: params => dispatch(createStage(params)),
     updateStage: params => dispatch(updateStage(params)),
     deleteStage: params => dispatch(deleteStage(params))

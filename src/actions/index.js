@@ -11,7 +11,15 @@ export const types = {
   GET_SERIES_BY_ID: 'GET_SERIES_BY_ID',
   CREATE_STAGE: 'CREATE_STAGE',
   UPDATE_STAGE: 'UPDATE_STAGE',
-  DELETE_STAGE: 'DELETE_STAGE'
+  DELETE_STAGE: 'DELETE_STAGE',
+  TOGGLE_MODAL: 'TOGGLE_MODAL'
+}
+
+export function toggleModal(payload) {
+  return {
+    type: types.TOGGLE_MODAL,
+    payload: payload
+  }
 }
 
 export function getSGTemplates() {
