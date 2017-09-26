@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './sg_logo.png';
 import './App.css';
 import DashboardContainer from './containers/DashboardContainer';
+import ConfirmModal from './components/ConfirmModal';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
           <h2>Custom Drip Campaign Dashboard</h2>
         </div>
         <DashboardContainer />
+        <ConfirmModal />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateSeries, deleteSeries } from '../actions';
+import { updateSeries, deleteSeries, toggleModal } from '../actions';
 import StageRow from './StageRow';
 import './Dashboard.css';
 
@@ -29,6 +29,10 @@ class Dashboard extends Component {
   }
 
   handleClickDelete() {
+    this.props.toggleModal(() => this.handleDelete());
+  }
+
+  handleDelete() {
     const { id } = this.props;
     this.props.deleteSeries({ id });
   }
@@ -170,6 +174,7 @@ class Dashboard extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
+    toggleModal: params => dispatch(toggleModal(params)),
     updateSeries: params => dispatch(updateSeries(params)),
     deleteSeries: params => dispatch(deleteSeries(params))
   }
