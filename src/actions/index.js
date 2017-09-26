@@ -12,7 +12,8 @@ export const types = {
   CREATE_STAGE: 'CREATE_STAGE',
   UPDATE_STAGE: 'UPDATE_STAGE',
   DELETE_STAGE: 'DELETE_STAGE',
-  TOGGLE_MODAL: 'TOGGLE_MODAL'
+  TOGGLE_MODAL: 'TOGGLE_MODAL',
+  GET_SERIES_USERS: 'GET_SERIES_USERS'
 }
 
 export function toggleModal(payload) {
@@ -116,6 +117,17 @@ export function deleteStage(params) {
       dispatch({
         type: types.DELETE_STAGE,
         payload: Object.assign({}, response.data, { emailSeryId: params.emailSeryId })
+      });
+    });
+  }
+}
+
+export function getSeriesUsers(emailSeryId) {
+  return dispatch => {
+    return axios.get(`${ROOT_URL}/series/users/${emailSeryId}`).then(response => {
+      dispatch({
+        type: types.GET_SERIES_USERS,
+        payload: { emailSeryId, users: response.data }
       });
     });
   }

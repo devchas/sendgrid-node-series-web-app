@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SeriesUsersContainer from '../containers/SeriesUsersContainer';
 import { connect } from 'react-redux';
 import { updateSeries, deleteSeries, toggleModal } from '../actions';
 import StageRow from './StageRow';
@@ -11,7 +12,8 @@ class Dashboard extends Component {
     this.state = {
       isEditingLabel: false,
       labelValue: '', 
-      addStage: false 
+      addStage: false,
+      isViewingUsers: false
     };
   }
 
@@ -41,23 +43,16 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div className="dashboard-header">  
-          {this.renderLabel()}
-          {this.renderLabelButtons()}
+          <div className="dashboard-header-row-1">
+            {this.renderLabel()}
+            {this.renderLabelButtons()}
+          </div>
+          <div className="dashboard-header-options">
+            {this.renderUserStageToggle()}
+          </div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Email Name</th>
-              <th style={{ width: '100px' }}>Days to Send</th>
-              <th>SendGrid Template Name</th>
-              <th style={{ width: '150px' }}></th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderStages()}
-          </tbody>
-        </table>
-        {this.newStageButton()}
+        {this.renderUserOrStageTable()}
+        {!this.state.isViewingUsers && this.newStageButton()}
       </div>
     );
   }
@@ -100,6 +95,39 @@ class Dashboard extends Component {
         </div>
       );
     }    
+  }
+
+  renderUserStageToggle() {
+    const { isViewingUsers } = this.state;
+    const buttonText = (isViewingUsers) ? "View Stages" : "View Users";
+    return <button onClick={() => this.setState({ isViewingUsers: !isViewingUsers })} 
+      className="label-button button-1">{buttonText}</button>;
+  }
+
+  renderUserOrStageTable() {
+    if (this.state.isViewingUsers) {
+      return <SeriesUsersContainer emailSeryId={this.props.id} stages={this.props.stages} />;
+    } else {
+      return this.renderStageTable();
+    }
+  }
+
+  renderStageTable() {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Email Name</th>
+            <th style={{ width: '100px' }}>Days to Send</th>
+            <th>SendGrid Template Name</th>
+            <th style={{ width: '150px' }}></th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.renderStages()}
+        </tbody>
+      </table>
+    );
   }
 
   renderStages() {
